@@ -9,31 +9,31 @@ Zero Trust Architecture removes this assumption and verifies every user and devi
 This lab demonstrates how identity-based networking and least privilege access control can be implemented using open tools.
 
 ---
-## Step 5 — Using Generative AI as a Security Copilot
+## Architecture Overview
 
-Security analysts often review authentication logs to identify suspicious activity.
+The following diagram illustrates the Zero Trust architecture implemented in this lab.
 
-View recent authentication logs:
+```mermaid
+graph TD
 
-sudo tail -n 20 /var/log/auth.log
+User[Security Analyst]
 
-Example log entry:
+User -->|GitHub SSO| Tailscale
 
-sudo: junioradmin : command not allowed ; COMMAND=/usr/bin/cat /etc/shadow
+Tailscale --> Server[Ubuntu Server]
 
-These logs can be analyzed using a Generative AI assistant.
+Server --> Service[Internal Service Port 8080]
 
-Example prompt:
+Server --> Logs[/var/log/auth.log]
 
-"Analyze the following Linux auth.log entries and identify potential security violations. Explain what happened and recommend mitigation steps."
+Logs --> GenAI[Generative AI Analysis]
 
-Generative AI can help analysts:
+GenAI --> Analyst[Security Insight]
+```
 
-• explain authentication failures
-• identify privilege escalation attempts
-• detect brute-force login patterns
+This diagram shows how identity verification, network access, and security monitoring interact within the Zero Trust model.
 
-This demonstrates how **AI can assist security teams in interpreting log data and improving incident response.**
+
 
 
 ## Lab Objectives
