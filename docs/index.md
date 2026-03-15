@@ -148,3 +148,30 @@ The second command should be denied, demonstrating that the user cannot access s
 
 This demonstrates the **Principle of Least Privilege**, ensuring that users receive only the permissions required for their operational role.
 
+## Step 5 — Using Generative AI as a Security Copilot
+
+Security analysts often review authentication logs to identify suspicious activity.
+
+View recent authentication logs:
+
+sudo tail -n 20 /var/log/auth.log
+
+Example log entry:
+
+sudo: junioradmin : command not allowed ; COMMAND=/usr/bin/cat /etc/shadow
+
+These logs can be analyzed using a Generative AI assistant.
+
+Example prompt:
+
+"Analyze the following Linux auth.log entries and identify potential security violations. Explain what happened and recommend mitigation steps."
+
+Generative AI can help analysts:
+
+• explain authentication failures
+• identify privilege escalation attempts
+• detect brute-force login patterns
+
+This demonstrates how **AI can assist security teams in interpreting log data and improving incident response.**
+
+
