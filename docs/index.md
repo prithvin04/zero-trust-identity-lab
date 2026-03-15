@@ -102,3 +102,49 @@ This rule allows the user to access only the service running on port 8080.
 
 All other ports and services are blocked, preventing lateral movement within the network.
 
+## Step 4 — Implement the Principle of Least Privilege
+
+Zero Trust architectures require that users receive only the permissions necessary to perform their tasks.
+
+In this step we create a **Junior Administrator** role that can restart a service but cannot access sensitive system files.
+
+### Create the User
+
+Run:
+
+sudo adduser junioradmin
+
+Verify the user exists:
+
+id junioradmin
+
+### Configure Limited Administrative Access
+
+Edit the sudo policy using:
+
+sudo visudo
+
+Add the following rule at the bottom of the file:
+
+junioradmin ALL=(ALL) NOPASSWD: /bin/systemctl restart nginx
+
+This rule allows the junior administrator to restart the nginx service but does not grant broader administrative privileges.
+
+### Test the Policy
+
+Switch to the user:
+
+su - junioradmin
+
+Allowed command:
+
+sudo systemctl restart nginx
+
+Restricted command:
+
+sudo cat /etc/shadow
+
+The second command should be denied, demonstrating that the user cannot access sensitive system files.
+
+This demonstrates the **Principle of Least Privilege**, ensuring that users receive only the permissions required for their operational role.
+
