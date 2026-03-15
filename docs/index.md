@@ -74,4 +74,31 @@ You should see a directory listing page.
 
 This service represents an **internal application running on port 8080** that will later be protected using Zero Trust access policies.
 
+## Step 3 — Implement Micro-Segmentation using Tailscale ACLs
+
+Zero Trust architectures restrict access to specific resources instead of allowing unrestricted network access.
+
+To implement micro-segmentation, we configure an Access Control List (ACL) policy in the Tailscale Admin Console.
+
+Open the admin console:
+
+https://login.tailscale.com/admin
+
+Navigate to **Access Controls** and modify the policy.
+
+Example rule:
+
+{
+"grants": [
+{
+"src": ["user_identity"],
+"dst": ["*"],
+"ip": ["*:8080"]
+}
+]
+}
+
+This rule allows the user to access only the service running on port 8080.
+
+All other ports and services are blocked, preventing lateral movement within the network.
 
