@@ -54,3 +54,24 @@ Expected output example:
 
 This indicates that the device has successfully joined the **Tailscale secure mesh network** using identity-based authentication.
 
+## Step 2 — Deploy a Protected Service
+
+To demonstrate Zero Trust access control, we first deploy a simple internal service.
+
+Run the following command:
+
+python3 -m http.server 8080
+
+Expected output:
+
+Serving HTTP on 0.0.0.0 port 8080
+
+Now open a browser and visit:
+
+http://localhost:8080
+
+You should see a directory listing page.
+
+This service represents an **internal application running on port 8080** that will later be protected using Zero Trust access policies.
+
+
