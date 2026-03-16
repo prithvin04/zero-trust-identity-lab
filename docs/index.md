@@ -8,30 +8,24 @@ Zero Trust Architecture removes this assumption and verifies every user and devi
 
 This lab demonstrates how identity-based networking and least privilege access control can be implemented using open tools.
 
----
-## Architecture Overview
-
-The following diagram illustrates the Zero Trust architecture implemented in this lab.
-
 ```mermaid
 graph TD
 
 User[Security Analyst]
 
-User -->|GitHub SSO| Tailscale
+User -->|GitHub SSO| Tailscale[Tailscale Network]
 
 Tailscale --> Server[Ubuntu Server]
 
-Server --> Service[Internal Service Port 8080]
+Server --> Service[Internal Service :8080]
 
-Server --> Logs[/var/log/auth.log]
+Server --> Logs[Auth Log]
 
 Logs --> GenAI[Generative AI Analysis]
 
 GenAI --> Analyst[Security Insight]
-```
 
-This diagram shows how identity verification, network access, and security monitoring interact within the Zero Trust model.
+```
 
 
 
