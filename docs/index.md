@@ -2,33 +2,33 @@
 
 ## Introduction
 
-Traditional networks often trust devices once they are inside the network.  
-For example, if a computer connects to an office Wi-Fi network or VPN, it may automatically gain access to internal systems.
+Traditional computer networks often trust devices once they are inside the network.  
+For example, if a device connects to an office Wi-Fi or VPN, it may automatically gain access to internal systems.
 
-This can be dangerous because if an attacker gains access to the network, they may be able to move between systems easily.
+This can be risky because if an attacker gains access to the network, they may be able to move between systems easily.
 
 **Zero Trust Architecture (ZTA)** removes this assumption.  
 Instead of trusting devices automatically, every user and device must be **verified before access is granted**.
 
-In this lab you will build a simple environment that demonstrates the key ideas behind Zero Trust security.
+In this lab you will build a simple environment that demonstrates how Zero Trust security works.
 
-Even if you have **never worked with these tools before**, you should be able to follow the instructions step-by-step.
+This guide is written so that **someone with little or no prior experience can follow it step-by-step**.
 
 ---
 
-# Prerequisites
+## Prerequisites
 
-Before starting the lab, make sure you have:
+Before starting this lab, make sure you have:
 
 - A computer running **Windows, macOS, or Linux**
 - An **Ubuntu Linux environment** (WSL, Virtual Machine, or native install)
 - A **GitHub account**
-- Internet access
+- Internet connection
 - Basic ability to run commands in a terminal
 
 ---
 
-# Lab Objectives
+## Lab Objectives
 
 After completing this lab you will be able to:
 
@@ -41,16 +41,16 @@ After completing this lab you will be able to:
 
 ---
 
-# Architecture Overview
+## Architecture Overview
 
-The diagram below shows how the system works.
+The diagram below shows the architecture used in this lab.
 
 ```mermaid
 graph TD
 
 User[Security Analyst]
 
-User -->|GitHub Login| Tailscale[Tailscale Network]
+User -->|GitHub Login| Tailscale[Tailscale Identity Network]
 
 Tailscale --> Server[Ubuntu Server]
 
@@ -65,21 +65,31 @@ GenAI --> Analyst[Security Insight]
 
 In this architecture:
 
-- The user logs in using **GitHub identity**
-- Tailscale creates a **secure network connection**
+- The user authenticates using **GitHub**
+- Tailscale creates a **secure identity-based network**
 - The Ubuntu server runs an internal service
 - Access policies restrict network access
-- System logs are analyzed using AI
+- Authentication logs can be analyzed using AI
 
 ---
 
 # Step 1 — Configure Identity-Based Connectivity
 
-Traditional networks rely on **IP addresses** to determine access.
+Traditional networks rely on **IP-based trust**, where devices inside the network are automatically trusted.
 
-Zero Trust instead verifies **identity**.
+Zero Trust systems verify **identity instead of network location**.
 
-We will use **Tailscale** to create a secure identity-based network.
+In this step we will use **Tailscale** to create a secure identity-based network.
+
+---
+
+## Open a Terminal
+
+If you are using **Ubuntu on WSL**:
+
+1. Open the **Ubuntu application** on your computer.
+2. A terminal window will appear.
+3. All commands in this guide should be run in this terminal.
 
 ---
 
@@ -91,10 +101,7 @@ Run the following command:
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
 
-What this command does:
-
-- Downloads the official Tailscale installer
-- Installs the software on your system
+This command downloads and installs the Tailscale software.
 
 ---
 
@@ -109,8 +116,6 @@ sudo tailscale up
 A browser window will open asking you to authenticate.
 
 Choose **GitHub login**.
-
-This connects your device to the Tailscale network.
 
 ---
 
@@ -128,15 +133,20 @@ Example output:
 100.x.x.x   ubuntu-server   username@   linux
 ```
 
-If you see an IP address starting with **100.x.x.x**, the connection was successful.
+If you see an IP address starting with **100.x.x.x**, your device has successfully joined the Tailscale network.
+
+---
+
+**Tip:**  
+Your output may look slightly different. That is normal.
 
 ---
 
 ### Why This Step Matters
 
-Identity-based networking ensures that only **verified users and devices** can join the network.
+Identity verification ensures that only **authenticated users and devices** can join the network.
 
-This is a core principle of **Zero Trust security**.
+This is one of the core ideas of **Zero Trust security**.
 
 ---
 
@@ -156,7 +166,7 @@ Expected output:
 Serving HTTP on 0.0.0.0 port 8080
 ```
 
-Open your browser and go to:
+Open a browser and go to:
 
 ```
 http://localhost:8080
@@ -168,7 +178,7 @@ You should see a **directory listing page**.
 
 ### Why This Step Matters
 
-This service represents an **internal application** that needs to be protected from unauthorized access.
+This web server represents an **internal application** that must be protected from unauthorized access.
 
 ---
 
@@ -206,9 +216,9 @@ Replace the policy with the following example:
 
 Explanation:
 
-- `src` → the user identity
-- `dst` → destination device
-- `ip` → allowed port
+- `src` → user identity  
+- `dst` → destination device  
+- `ip` → allowed port  
 
 This rule allows access **only to port 8080**.
 
@@ -225,8 +235,6 @@ This reduces the risk of **lateral movement**.
 # Step 4 — Apply the Principle of Least Privilege
 
 The **Principle of Least Privilege** means that users should receive only the permissions necessary to perform their tasks.
-
-We will create a limited administrator account.
 
 ---
 
@@ -254,7 +262,7 @@ Edit the sudo configuration:
 sudo visudo
 ```
 
-Add this rule at the bottom:
+Add this rule at the bottom of the file:
 
 ```
 junioradmin ALL=(ALL) NOPASSWD: /bin/systemctl restart nginx
@@ -290,7 +298,7 @@ The second command should be denied.
 
 ### Why This Step Matters
 
-Limiting permissions reduces the damage that could occur if an account is compromised.
+Limiting privileges reduces the damage that could occur if an account is compromised.
 
 ---
 
@@ -322,7 +330,7 @@ and potential security issues. Explain what happened and recommend
 mitigation steps.
 ```
 
-AI can help analysts:
+AI tools can help analysts:
 
 - interpret log entries
 - identify suspicious behavior
@@ -332,7 +340,7 @@ AI can help analysts:
 
 # Conclusion
 
-In this lab you implemented several core Zero Trust security concepts:
+In this lab you implemented several important Zero Trust concepts:
 
 - Identity-based networking
 - Micro-segmentation
