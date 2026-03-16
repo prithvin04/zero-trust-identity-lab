@@ -1,77 +1,87 @@
 # Zero Trust & Identity Lab
 
-## Overview
+## What This Project Is About
 
-This project demonstrates a **hands-on implementation of Zero Trust Architecture (ZTA)** using open-source tools.
+Most traditional computer networks trust devices once they are inside the network.
 
-Traditional networks rely on perimeter-based security where devices inside the network are automatically trusted.  
-Zero Trust removes this assumption and verifies **every user, device, and request before granting access**.
+For example, if a device connects to a company network or VPN, it may automatically gain access to internal systems.
 
-In this lab, we build a simple environment that demonstrates key Zero Trust security principles including:
+This approach can be risky. If an attacker gains access to the network, they may be able to move freely between systems.
 
-- Identity-based connectivity
-- Micro-segmentation
-- Least privilege access control
-- AI-assisted log analysis
+**Zero Trust Architecture (ZTA)** removes this assumption. Instead of trusting devices automatically, every user and device must be **verified before access is granted**.
 
-The lab is designed so that **beginners with minimal security knowledge can follow it step-by-step**.
+This project provides a **beginner-friendly lab** that demonstrates how Zero Trust security concepts can be implemented using simple tools.
+
+Even if you have **no prior experience**, you should be able to follow the instructions step-by-step.
 
 ---
 
-## Learning Objectives
+## What You Will Learn
 
-After completing this lab you will be able to:
+By completing this lab, you will learn how to:
 
-- Understand the concept of **Zero Trust Architecture**
-- Configure **identity-based networking using Tailscale**
-- Deploy a simple internal service
-- Implement **micro-segmentation using access control policies**
-- Apply the **Principle of Least Privilege** in Linux
-- Use **Generative AI to analyze security logs**
+- Create an identity-based network using **Tailscale**
+- Deploy a simple internal service on a Linux system
+- Restrict network access using **micro-segmentation**
+- Apply the **Principle of Least Privilege**
+- Use **Generative AI** to analyze authentication logs
+
+These concepts are widely used in modern cybersecurity environments.
 
 ---
 
-## Technology Stack
+## Tools Used in This Lab
+
+The following tools are used in this project:
 
 | Tool | Purpose |
 |-----|--------|
-| Tailscale | Identity-based networking |
-| Ubuntu Linux | Server environment |
-| GitHub SSO | Identity provider |
-| Tailscale ACLs | Micro-segmentation |
-| Linux sudoers | Role-based access control |
-| auth.log | Security monitoring |
-| Generative AI | Log analysis |
+| Tailscale | Creates a secure identity-based network |
+| Ubuntu Linux | Provides the server environment |
+| GitHub SSO | Used for identity authentication |
+| Tailscale ACLs | Restricts access to specific services |
+| Linux sudoers | Controls administrative permissions |
+| auth.log | Stores authentication activity |
+| Generative AI | Helps analyze system logs |
+
+---
+
+## Who This Lab Is For
+
+This lab is designed for:
+
+- Students learning cybersecurity
+- Beginners exploring Zero Trust concepts
+- Anyone interested in modern network security
+
+No previous experience with Zero Trust or Tailscale is required.
 
 ---
 
 ## Lab Guide
 
-The complete beginner-friendly lab instructions are available here:
+The full **step-by-step beginner guide** is available here:
 
-👉 **GitHub Pages Lab Guide**
+**GitHub Pages Lab Guide**
 
 https://prithvin04.github.io/zero-trust-identity-lab
 
+Follow the instructions in the guide to complete the lab.
+
 ---
 
-## What This Lab Demonstrates
+## What You Will Build
 
-This lab demonstrates the transition from traditional network trust to a **Zero Trust security model**.
+During this lab you will create a simple Zero Trust environment where:
 
-Key security concepts implemented:
+1. A user authenticates using **GitHub identity**
+2. A secure network is created using **Tailscale**
+3. An internal web service runs on **port 8080**
+4. Network access is restricted using **micro-segmentation policies**
+5. A limited administrator account is created
+6. System logs are analyzed using **AI tools**
 
-1. **Identity-Centric Connectivity**  
-   Users authenticate using GitHub identity through Tailscale.
-
-2. **Micro-Segmentation**  
-   Network access is restricted to a specific service (port 8080).
-
-3. **Principle of Least Privilege**  
-   A junior administrator account can only restart a service.
-
-4. **AI-Assisted Security Analysis**  
-   Generative AI helps interpret authentication logs.
+This demonstrates how Zero Trust security works in practice.
 
 ---
 
@@ -81,14 +91,13 @@ Key security concepts implemented:
 zero-trust-identity-lab
 │
 ├── README.md
-├── docs
-│   └── index.md     # Complete lab guide
+└── docs
+    └── index.md   # Full beginner-friendly lab guide
 ```
 
 ---
 
 ## Author
 
-**Prithvin M**
-
+Prithvin M  
 Cyber Security Internship Technical Challenge Submission
